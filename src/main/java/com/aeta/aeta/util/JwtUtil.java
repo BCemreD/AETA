@@ -1,41 +1,58 @@
 package com.aeta.aeta.util;
 
-import com.aeta.aeta.model.entity.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-
-import static org.springframework.security.config.Elements.JWT;
+import java.util.function.Function;
 
 @Component
-    public class JwtUtil {
+public class JwtUtil {
 
-        private final String SECRET_KEY = "superSecretKey123";
-        private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 saat
+    @Value("${jwt.secret}")
+    private String secretKey;
 
-        public String generateToken(User user) {
-            return JWT.create()
-                    .withSubject(user.getUsername())
-                    .withClaim("role", user.getRole())
-                    .withIssuedAt(new Date())
-                    .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                    .sign(Algorithm.HMAC256(SECRET_KEY));
-        }
+    @Value("${jwt.expiration}")
+    private long jwtExpiration;
 
-        public String extractUsername(String token) {
-            return decodeToken(token).getSubject();
-        }
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
 
-        public boolean validateToken(String token, String username) {
-            return username.equals(extractUsername(token)) && !isTokenExpired(token);
-        }
+    public Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
 
-        private boolean isTokenExpired(String token) {
-            return decodeToken(token).getExpiresAt().before(new Date());
-        }
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
 
-        private DecodedJWT decodeToken(String token) {
-            return JWT.require(Algorithm.HMAC256(SECRET_KEY)).build().verify(token);
-        }
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    private Boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+    }
+
+    public Boolean validateToken(String token, String username) {
+        final String extractedUsername = extractUsername(token);
+        return (extractedUsername.equals(username) && !isTokenExpired(token));
     }
 }

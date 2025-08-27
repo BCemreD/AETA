@@ -37,7 +37,7 @@ public class AuthController {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtUtil.generateToken(existingUser);
+        String token = jwtUtil.generateToken(existingUser.getUsername());
         UserDto userDto = modelMapper.map(existingUser, UserDto.class);
 
         return Map.of(

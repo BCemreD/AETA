@@ -23,8 +23,6 @@ public class UserServiceImpl implements IUserService {
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
                 .email(dto.getEmail())
-                .password(dto.getPassword()) // TODO: burada password encode edilmeli!
-                .role(dto.getRole())
                 .build();
 
         User saved = userRepository.save(user);
@@ -60,7 +58,6 @@ public class UserServiceImpl implements IUserService {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
-                .role(user.getRole())
                 .build();
     }
 }
