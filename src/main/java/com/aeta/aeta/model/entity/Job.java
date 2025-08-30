@@ -1,6 +1,7 @@
 package com.aeta.aeta.model.entity;
 
 import com.aeta.aeta.model.entity.base.BaseContentEntity;
+import com.aeta.aeta.model.entity.relation.Tag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -1,6 +1,6 @@
 package com.aeta.aeta.model.entity.base;
 
-import com.aeta.aeta.model.entity.Category;
+import com.aeta.aeta.model.entity.relation.Category;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

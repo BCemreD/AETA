@@ -1,10 +1,9 @@
-package com.aeta.aeta.model.entity;
+package com.aeta.aeta.model.entity.relation;
 
 import com.aeta.aeta.model.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import java.util.*;
 
 @Entity
 @Table (name = "categories")

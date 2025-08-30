@@ -1,5 +1,6 @@
-package com.aeta.aeta.model.entity;
+package com.aeta.aeta.model.entity.relation;
 
+import com.aeta.aeta.model.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,10 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-    public class Tag {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    public class Tag extends BaseEntity {
 
         @Column(unique = true)
         private String name;
