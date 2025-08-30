@@ -37,3 +37,13 @@ INSERT INTO blogs (title,image_src, image_alt, url, created_at, updated_at, crea
 ('Web Yazılımına Nereden Başlanmalı?', '','','https://gelecegiyazanlar.turkcell.com.tr/blog/web-yazilimina-nereden-baslanmali','','','','',''),
 ('React JS için Redux Kurulumu ve Yönetimi', '','','https://gelecegiyazanlar.turkcell.com.tr/blog/react-js-icin-redux-kurulumu-ve-yonetimi','','','','',''),
 ('Pandas ile Veri Analizi', '','','https://gelecegiyazanlar.turkcell.com.tr/blog/pandas-ile-veri-analizi','','','','',''),
+
+-- Career paths
+INSERT INTO career_paths (name, description) VALUES
+('Java Backend Developer', 'Java ve Spring Boot ile backend geliştirme için yol haritası');
+
+-- CareerPath course order
+INSERT INTO career_path_courses (career_path_id, course_id, order_no) VALUES
+(1, 1, 1), -- Java
+(1, 5, 2), -- İleri Java
+(1, 3, 3), -- React
