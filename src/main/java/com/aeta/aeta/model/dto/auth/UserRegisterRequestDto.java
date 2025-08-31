@@ -1,4 +1,4 @@
-package com.aeta.aeta.model.dto;
+package com.aeta.aeta.model.dto.auth;
 
 import lombok.Data;
 

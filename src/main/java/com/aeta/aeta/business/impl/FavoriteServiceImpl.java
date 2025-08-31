@@ -3,7 +3,7 @@ package com.aeta.aeta.business.impl;
 import com.aeta.aeta.business.service.IFavoriteService;
 import com.aeta.aeta.model.dto.CourseDto;
 import com.aeta.aeta.model.dto.FavoriteDto;
-import com.aeta.aeta.model.dto.UserDto;
+import com.aeta.aeta.model.dto.auth.UserDto;
 import com.aeta.aeta.model.entity.Course;
 import com.aeta.aeta.model.entity.Favorite;
 import com.aeta.aeta.model.entity.User;

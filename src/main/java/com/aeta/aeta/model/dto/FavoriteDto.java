@@ -1,5 +1,6 @@
 package com.aeta.aeta.model.dto;
 
+import com.aeta.aeta.model.dto.auth.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,9 +1,11 @@
 package com.aeta.aeta.controller;
 
-import com.aeta.aeta.model.dto.UserDto;
-import com.aeta.aeta.model.dto.UserRegisterRequestDto;
+import com.aeta.aeta.model.dto.auth.LoginRequestDto;
+import com.aeta.aeta.model.dto.auth.UserDto;
+import com.aeta.aeta.model.dto.auth.UserRegisterRequestDto;
 import com.aeta.aeta.model.entity.User;
 import com.aeta.aeta.util.JwtUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +25,7 @@ public class AuthController {
     private final ModelMapper modelMapper;
 
     @PostMapping("/register")
-    public String register(@RequestBody UserRegisterRequestDto request) {
+    public String register(@RequestBody @Valid UserRegisterRequestDto request) {
         // DTO → Entity convert
         User user = modelMapper.map(request, User.class);
         // password encode
@@ -36,11 +38,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody User user) {
-        User existingUser = userRepository.findByUsername(user.getUsername())
+    public Map<String, Object> login(@RequestBody LoginRequestDto request){
+        User existingUser = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), existingUser.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
 

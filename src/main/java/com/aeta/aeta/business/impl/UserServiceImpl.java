@@ -1,8 +1,8 @@
 package com.aeta.aeta.business.impl;
 
 import com.aeta.aeta.business.service.IUserService;
-import com.aeta.aeta.model.dto.UserDto;
-import com.aeta.aeta.model.dto.UserRegisterRequestDto;
+import com.aeta.aeta.model.dto.auth.UserDto;
+import com.aeta.aeta.model.dto.auth.UserRegisterRequestDto;
 import com.aeta.aeta.model.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
