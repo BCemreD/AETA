@@ -33,7 +33,7 @@ public class User {
     private String email;
 
     @NotBlank
-    @Size(min = 8)
+    @Size(min = 8, max = 50)
     private String password;
 
     private String role; //this attribute would be separated in the future

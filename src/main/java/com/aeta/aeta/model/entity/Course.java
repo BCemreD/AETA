@@ -21,6 +21,9 @@ public class Course extends BaseContentEntity {
     @Column(name = "image_alt")
     private String imageAlt;
 
+    @Column(name="url")
+    private String url;
+
     @ManyToMany
     @JoinTable(
             name = "course_tags",

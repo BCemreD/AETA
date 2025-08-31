@@ -21,6 +21,9 @@ public class Job extends BaseContentEntity {
     @Size(min = 50)
     private String description;
 
+    @Column(name = "url")
+    private String url;
+
     @ManyToMany
     @JoinTable(
             name = "job_tags",

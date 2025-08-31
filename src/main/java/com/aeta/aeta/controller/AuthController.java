@@ -1,6 +1,7 @@
 package com.aeta.aeta.controller;
 
 import com.aeta.aeta.model.dto.UserDto;
+import com.aeta.aeta.model.dto.UserRegisterRequestDto;
 import com.aeta.aeta.model.entity.User;
 import com.aeta.aeta.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,14 @@ public class AuthController {
     private final ModelMapper modelMapper;
 
     @PostMapping("/register")
-    public String register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public String register(@RequestBody UserRegisterRequestDto request) {
+        // DTO → Entity convert
+        User user = modelMapper.map(request, User.class);
+        // password encode
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        // default role
+        user.setRole("USER");
+
         userRepository.save(user);
         return "User registered successfully";
     }
@@ -57,4 +64,3 @@ public class AuthController {
         return modelMapper.map(user, UserDto.class);
     }
 }
-

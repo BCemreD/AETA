@@ -12,4 +12,5 @@ public class CourseDto {
     private String title;
     private String imageSrc;
     private String imageAlt;
+    private String url;
 }

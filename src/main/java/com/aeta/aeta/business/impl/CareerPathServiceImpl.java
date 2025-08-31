@@ -16,7 +16,7 @@ public class CareerPathServiceImpl implements ICareerPathService {
 
     @Override
     public List<CourseDto> getCoursesForCareerPath(Long careerPathId) {
-        return careerPathCourseRepository.findByCareerPathIdOrderByOrderNoAsc(careerPathId)
+        return careerPathCourseRepository.findByCareerPath_IdOrderByOrderNoAsc(careerPathId)
                 .stream()
                 .map(cpc -> CourseDto.builder()
                         .id(cpc.getCourse().getId())

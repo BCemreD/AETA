@@ -13,5 +13,6 @@ public class JobDto {
     private Long id;
     private String title;
     private String description;
+    private String url;
     private String tag;
 }
