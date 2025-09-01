@@ -38,7 +38,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody LoginRequestDto request){
+    public Map<String, Object> login(@RequestBody LoginRequestDto request) {
         User existingUser = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 

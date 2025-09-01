@@ -8,10 +8,12 @@ import com.aeta.aeta.model.entity.Course;
 import com.aeta.aeta.model.entity.Favorite;
 import com.aeta.aeta.model.entity.User;
 import com.aeta.aeta.model.repository.FavoriteRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class FavoriteServiceImpl implements IFavoriteService {
     private final FavoriteRepository favoriteRepository;
     public FavoriteServiceImpl(FavoriteRepository favoriteRepository) {

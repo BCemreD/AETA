@@ -17,9 +17,10 @@ import java.util.List;
         }
 
         @GetMapping("/tag/{id}")
-        public List<BlogDto> getBlogsByTag(@PathVariable Long tagId) {
+        public List<BlogDto> getBlogsByTag(@PathVariable("id") Long tagId) {
             return blogService.getBlogsByTag(tagId);
         }
+
     }
 
 
