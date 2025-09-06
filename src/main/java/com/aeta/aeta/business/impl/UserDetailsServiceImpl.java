@@ -22,10 +22,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
+        String role = user.getRole();
+        if (role == null || role.isBlank()) {
+            role = "ROLE_USER"; // fallback default role
+        }
+
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                Collections.singleton(new SimpleGrantedAuthority(user.getRole()))
+                Collections.singleton(new SimpleGrantedAuthority(role))
         );
     }
+
 }

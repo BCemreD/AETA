@@ -1,10 +1,13 @@
 package com.aeta.aeta.model.entity;
 
+import com.aeta.aeta.model.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -12,7 +15,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +39,8 @@ public class User {
     @Size(min = 8, max = 100)//bcrypt
     private String password;
 
+    @Column(nullable = false)
     private String role; //this attribute would be separated in the future
+
+
 }

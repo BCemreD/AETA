@@ -8,6 +8,7 @@ import java.util.List;
 
     @RestController
     @RequestMapping("/api/courses")
+    @CrossOrigin(origins = "http://localhost:5173")
     public class CourseController {
 
         private final ICourseService courseService;
@@ -27,8 +28,8 @@ import java.util.List;
         }
 
         @GetMapping("/tag/{tag}")
-        public List<CourseDto> getCoursesByTag(@PathVariable String tag) {
-            return courseService.getCoursesByTag(tag);
+        public List<CourseDto> getCoursesByTag(@PathVariable Long tagId) {
+            return courseService.getCoursesByTag(tagId);
         }
     }
 

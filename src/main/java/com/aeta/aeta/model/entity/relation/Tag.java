@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
     public class Tag extends BaseEntity {
 
         @Column(unique = true)
