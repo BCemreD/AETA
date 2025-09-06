@@ -63,17 +63,11 @@ public class FavoriteServiceImpl implements IFavoriteService {
     private FavoriteDto toDto(Favorite favorite) {
         return FavoriteDto.builder()
                 .id(favorite.getId())
-                .course(CourseDto.builder()
-                        .id(favorite.getCourse().getId())
-                        .title(favorite.getCourse().getTitle())
-                        .build())
-                .user(UserDto.builder()
-                        .id(favorite.getUser().getId())
-                        .firstName(favorite.getUser().getFirstName())
-                        .lastName(favorite.getUser().getLastName())
-                        .build())
+                .course(toCourseDto(favorite.getCourse()))
+                .user(toUserDto(favorite.getUser()))
                 .build();
     }
+
 
     private CourseDto toCourseDto(Course course) {
         return CourseDto.builder()
