@@ -4,6 +4,7 @@ import com.aeta.aeta.business.service.ICourseService;
 import com.aeta.aeta.exception.ResourceNotFoundException;
 import com.aeta.aeta.model.dto.CourseDto;
 import com.aeta.aeta.model.entity.Course;
+import com.aeta.aeta.model.entity.relation.Category;
 import com.aeta.aeta.model.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,15 @@ public class CourseServiceImpl implements ICourseService {
                 .orElseThrow(() -> new ResourceNotFoundException("Course", "id", id));
         return toDto(course);
     }
+
+    @Override
+    public List<CourseDto> getCoursesByCategory(Long categoryId) {
+        List<Course> courses = courseRepository.findByCategoriesId(categoryId);
+        return courses.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
     private CourseDto toDto(Course course) {
         return CourseDto.builder()
                 .id(course.getId())
@@ -49,6 +59,10 @@ public class CourseServiceImpl implements ICourseService {
                 .imageAlt(course.getImageAlt())
                 .url(course.getUrl())
                 .tags(course.getTags().stream().map(tag -> tag.getName()).collect(Collectors.toSet()))
+                .categories(course.getCategories().stream()
+                        .map(Category::getName)
+                        .collect(Collectors.toSet()))
+
                 .build();
     }
 }

@@ -16,5 +16,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 
     @Query("SELECT b FROM Blog b JOIN FETCH b.tags t WHERE t.id = :tagId")
     List<Blog> findByTagsIdWithTags(@Param("tagId") Long tagId);
+
+    List<Blog> findByCategoriesId(@Param("categoryId") Long categoryId);
 }
 

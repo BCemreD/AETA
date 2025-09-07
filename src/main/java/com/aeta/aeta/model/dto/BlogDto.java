@@ -15,4 +15,6 @@ public class BlogDto {
     private String imageAlt;
     private String url;
     private Set<String> tags;
+    private Set<String> categories;
+
 }

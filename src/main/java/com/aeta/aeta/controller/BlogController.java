@@ -27,6 +27,12 @@ import java.util.List;
             return blogService.getBlogsByTag(tagId);
         }
 
+        @GetMapping("/by-category/{id}")
+        public List<BlogDto> getBlogsByCategory(@PathVariable Long id) {
+            return blogService.getBlogsByCategory(id);
+        }
+
+
     }
 
 

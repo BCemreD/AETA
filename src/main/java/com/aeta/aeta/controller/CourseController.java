@@ -31,6 +31,11 @@ import java.util.List;
         public List<CourseDto> getCoursesByTag(@PathVariable Long tagId) {
             return courseService.getCoursesByTag(tagId);
         }
+        @GetMapping("/by-category/{id}")
+        public List<CourseDto> getCoursesByCategory(@PathVariable Long id) {
+            return courseService.getCoursesByCategory(id);
+        }
+
     }
 
 

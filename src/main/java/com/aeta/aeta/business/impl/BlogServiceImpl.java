@@ -3,6 +3,7 @@ package com.aeta.aeta.business.impl;
 import com.aeta.aeta.business.service.IBlogService;
 import com.aeta.aeta.model.dto.BlogDto;
 import com.aeta.aeta.model.entity.Blog;
+import com.aeta.aeta.model.entity.relation.Category;
 import com.aeta.aeta.model.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,14 @@ public class BlogServiceImpl implements IBlogService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<BlogDto> getBlogsByCategory(Long categoryId) {
+        List<Blog> blogs = blogRepository.findByCategoriesId(categoryId);
+        return blogs.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
     private BlogDto toDto(Blog blog) {
         return BlogDto.builder()
                 .id(blog.getId())
@@ -43,6 +52,10 @@ public class BlogServiceImpl implements IBlogService {
                 .imageAlt(blog.getImageAlt())
                 .url(blog.getUrl())
                 .tags(blog.getTags().stream().map(tag -> tag.getName()).collect(Collectors.toSet()))
+                .categories(blog.getCategories().stream()
+                        .map(Category::getName)
+                        .collect(Collectors.toSet()))
+
                 .build();
     }
 }

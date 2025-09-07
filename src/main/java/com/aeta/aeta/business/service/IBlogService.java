@@ -7,4 +7,6 @@ public interface IBlogService {
 
     List<BlogDto> getAllBlogs();
     List<BlogDto> getBlogsByTag(Long tagId);
+    List<BlogDto> getBlogsByCategory(Long categoryId);
+
 }

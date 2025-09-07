@@ -8,4 +8,6 @@ public interface ICourseService {
     List<CourseDto> getCoursesByTag(Long tagId); // Parametreyi Long tagId olarak değiştirdik
     CourseDto getCourseById(Long id);
     List<CourseDto> getAllCourses();
+    List<CourseDto> getCoursesByCategory(Long categoryId);
+
 }
