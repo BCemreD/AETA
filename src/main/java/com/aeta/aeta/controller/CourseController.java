@@ -27,7 +27,7 @@ import java.util.List;
             return courseService.getCourseById(id);
         }
 
-        @GetMapping("/tag/{tag}")
+        @GetMapping("/tag/{tagId}")
         public List<CourseDto> getCoursesByTag(@PathVariable Long tagId) {
             return courseService.getCoursesByTag(tagId);
         }
