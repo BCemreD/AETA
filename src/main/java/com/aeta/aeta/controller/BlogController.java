@@ -32,7 +32,13 @@ import java.util.List;
             return blogService.getBlogsByCategory(id);
         }
 
-
+        @GetMapping("/search")
+        public List<BlogDto> searchBlogs(
+                @RequestParam(required = false) List<Long> tagIds,
+                @RequestParam(required = false) List<Long> categoryIds
+        ) {
+            return blogService.searchBlogsByTagsOrCategories(tagIds, categoryIds);
+        }
     }
 
 

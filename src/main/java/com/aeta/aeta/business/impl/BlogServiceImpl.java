@@ -7,7 +7,9 @@ import com.aeta.aeta.model.entity.relation.Category;
 import com.aeta.aeta.model.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +42,23 @@ public class BlogServiceImpl implements IBlogService {
     public List<BlogDto> getBlogsByCategory(Long categoryId) {
         List<Blog> blogs = blogRepository.findByCategoriesId(categoryId);
         return blogs.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BlogDto> searchBlogsByTagsOrCategories(List<Long> tagIds, List<Long> categoryIds) {
+        Set<Blog> resultSet = new HashSet<>();
+
+        if(tagIds != null && !tagIds.isEmpty()) {
+            resultSet.addAll(blogRepository.findByTagsIdIn(tagIds));
+        }
+
+        if(categoryIds != null && !categoryIds.isEmpty()) {
+            resultSet.addAll(blogRepository.findByCategoriesIdIn(categoryIds));
+        }
+
+        return resultSet.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }

@@ -15,6 +15,8 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findAllWithTags();
 
     List<Course> findByTagsId(Long tagId);
-
     List<Course> findByCategoriesId(@Param("categoryId") Long categoryId);
+    List<Course> findByTagsIdIn(List<Long> tagIds);
+    List<Course> findByCategoriesIdIn(List<Long> categoryIds);
+
 }

@@ -9,5 +9,6 @@ public interface ICourseService {
     CourseDto getCourseById(Long id);
     List<CourseDto> getAllCourses();
     List<CourseDto> getCoursesByCategory(Long categoryId);
+    public List<CourseDto> searchCoursesByTagsOrCategories(List<Long> tagIds, List<Long> categoryIds);
 
 }

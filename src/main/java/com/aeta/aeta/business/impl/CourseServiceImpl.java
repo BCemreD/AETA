@@ -8,7 +8,9 @@ import com.aeta.aeta.model.entity.relation.Category;
 import com.aeta.aeta.model.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,6 +49,23 @@ public class CourseServiceImpl implements ICourseService {
     public List<CourseDto> getCoursesByCategory(Long categoryId) {
         List<Course> courses = courseRepository.findByCategoriesId(categoryId);
         return courses.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CourseDto> searchCoursesByTagsOrCategories(List<Long> tagIds, List<Long> categoryIds) {
+        Set<Course> resultSet = new HashSet<>();
+
+        if(tagIds != null && !tagIds.isEmpty()) {
+            resultSet.addAll(courseRepository.findByTagsIdIn(tagIds));
+        }
+
+        if(categoryIds != null && !categoryIds.isEmpty()) {
+            resultSet.addAll(courseRepository.findByCategoriesIdIn(categoryIds));
+        }
+
+        return resultSet.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }

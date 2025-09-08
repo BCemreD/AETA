@@ -36,6 +36,13 @@ import java.util.List;
             return courseService.getCoursesByCategory(id);
         }
 
+        @GetMapping("/search")
+        public List<CourseDto> searchCourses(
+                @RequestParam(required = false) List<Long> tagIds,
+                @RequestParam(required = false) List<Long> categoryIds
+        ) {
+            return courseService.searchCoursesByTagsOrCategories(tagIds, categoryIds);
+        }
     }
 
 

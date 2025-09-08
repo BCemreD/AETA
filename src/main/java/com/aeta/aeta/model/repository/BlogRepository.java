@@ -15,8 +15,11 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
     List<Blog> findAllWithTags();
 
     @Query("SELECT b FROM Blog b JOIN FETCH b.tags t WHERE t.id = :tagId")
-    List<Blog> findByTagsIdWithTags(@Param("tagId") Long tagId);
+    List<Blog> findByTagsIdWithTags(@Param("tagId") Long tagId);//unique id
 
     List<Blog> findByCategoriesId(@Param("categoryId") Long categoryId);
+    List<Blog> findByTagsIdIn(List<Long> tagIds);
+    List<Blog> findByCategoriesIdIn(List<Long> categoryIds);
+
 }
 
