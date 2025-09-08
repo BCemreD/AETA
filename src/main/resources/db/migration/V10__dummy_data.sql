@@ -5,8 +5,8 @@ INSERT INTO tags (name, created_by, updated_by) VALUES
 ('Python', 'system', 'system'),
 ('JavaScript', 'system', 'system'),
 ('Cloud', 'system', 'system'),
-('Data Science', 'system', 'system');
-('React', 'system', 'system');
+('Data Science', 'system', 'system'),
+('React', 'system', 'system'),
 ('Veri Görselleştirme', 'system', 'system');
 
 -- CATEGORIES
@@ -15,10 +15,10 @@ INSERT INTO categories (name, created_by, updated_by) VALUES
 ('Mobil Uygulama', 'system', 'system'),
 ('Veri Bilimi', 'system', 'system'),
 ('Bulut Bilişim', 'system', 'system'),
-('Kariyer', 'system', 'system');
-('Backend', 'system', 'system');
-('Frontend', 'system', 'system');
-('Web Programlama', 'system', 'system')
+('Kariyer', 'system', 'system'),
+('Backend', 'system', 'system'),
+('Frontend', 'system', 'system'),
+('Web Programlama', 'system', 'system');
 
 -- JOBS
 INSERT INTO jobs (title, description, created_at, updated_at, created_by, updated_by) VALUES
@@ -58,14 +58,13 @@ INSERT INTO career_path_courses (career_path_id, course_id, order_no) VALUES
 INSERT INTO course_tags (course_id, tag_id) VALUES
 (1, 1), -- Java -> Java tag'i
 (2, 3), -- İleri Python -> Python tag'i
-(2, 5), -- İleri Python -> Data Science tag'i
-(2, 5), -- İleri Python -> Veri Görselleştirme tag'i
-(5, 1), -- İleri Java -> Java tag'i
+(2, 6), -- İleri Python -> Data Science tag'i
+(2, 8), -- İleri Python -> Veri Görselleştirme tag'i
 (3, 4), -- React -> JS tag'i
 (3, 7), -- React -> React tag'i
 (4, 6), -- Veri Manipülasyonu -> Data Science tag'i
 (4, 8), -- Veri Manipülasyonu -> Data Science tag'i
-(5, 1); -- İleri Java -> Java tag'i
+(5, 1), -- İleri Java -> Java tag'i
 (5, 2); -- İleri Java -> Spring Boot tag'i
 
 -- blogs and tags
@@ -97,8 +96,8 @@ INSERT INTO course_categories (course_id, category_id) VALUES
 (2, 7), -- İleri Python -> frontend
 (3, 7), -- React -> Frontend
 (4, 3), -- Veri Manipülasyonu -> veri bilimi
-(5, 1); -- İleri Java -> yazılım geliştirme
-(5, 2); -- İleri Java -> mobil uygulama
+(5, 1), -- İleri Java -> yazılım geliştirme
+(5, 2), -- İleri Java -> mobil uygulama
 (5, 6); -- İleri Java -> backend
 
 -- blogs and categories

@@ -11,12 +11,14 @@ import com.aeta.aeta.model.repository.BlogRepository;
 import com.aeta.aeta.model.repository.CategoryRepository;
 import com.aeta.aeta.model.repository.CourseRepository;
 import com.aeta.aeta.model.repository.TagRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
 public class SearchServiceImpl implements ISearchService {
 
 

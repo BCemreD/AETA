@@ -6,7 +6,9 @@ import com.aeta.aeta.model.dto.CourseDto;
 import com.aeta.aeta.model.dto.SearchRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/search")
@@ -19,13 +21,17 @@ public class SearchController {
         this.searchService = searchService;
     }
 
-    @PostMapping("/courses")
-    public List<CourseDto> searchCourses(@RequestBody SearchRequest request) {
-        return searchService.searchCourses(request.getQuery());
+    @PostMapping
+    public Map<String, Object> searchAll(@RequestBody SearchRequest request) {
+        List<CourseDto> courses = searchService.searchCourses(request.getQuery());
+        List<BlogDto> blogs = searchService.searchBlogs(request.getQuery());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("courses", courses);
+        response.put("blogs", blogs);
+        response.put("botMessage", "Toplam " + (courses.size() + blogs.size()) + " sonuç bulundu.");
+
+        return response;
     }
 
-    @PostMapping("/blogs")
-    public List<BlogDto> searchBlogs(@RequestBody SearchRequest request) {
-        return searchService.searchBlogs(request.getQuery());
-    }
 }
