@@ -37,7 +37,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 username = jwtUtil.extractUsername(jwt);
             } catch (Exception e) {
-
                 System.err.println("JWT doğrulanırken bir hata oluştu: " + e.getMessage());
             }
         }

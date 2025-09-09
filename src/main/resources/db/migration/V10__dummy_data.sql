@@ -29,20 +29,21 @@ INSERT INTO jobs (title, description, created_at, updated_at, created_by, update
 ('Mobile App Developer', 'Android (Kotlin) ve iOS (Swift) uygulama geliştirme', NOW(), NOW(), 'system', 'system');
 
 -- COURSES
-INSERT INTO courses (title, image_src, image_alt, url, created_at, updated_at, created_by, updated_by) VALUES
-('Java', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimler/java', NOW(), NOW(), 'system', 'system'),
-('İleri Python', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimler/ileri-python', NOW(), NOW(), 'system', 'system'),
-('React', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimler/react', NOW(), NOW(), 'system', 'system'),
-('Veri Manipülasyonu', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimler/veri-manipulasyonu', NOW(), NOW(), 'system', 'system'),
-('İleri Java', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimler/ileri-java', NOW(), NOW(), 'system', 'system');
+INSERT INTO courses (title, image_src, image_alt, url, created_at, created_by, updated_at, updated_by) VALUES
+('Java', 'java.png', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimleri/java/', NOW(), 'system', NOW(), 'system'),
+('İleri Python', 'python.png', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimleri/ileri-python', NOW(), 'system', NOW(), 'system'),
+('React', 'react.png', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimler/react', NOW(), 'system', NOW(), 'system'),
+('Veri Manipülasyonu', '', 'auto.png', 'https://gelecegiyazanlar.turkcell.com.tr/egitimler/veri-manipulasyonu', NOW(), 'system', NOW(), 'system'),
+('İleri Java', 'java.png', '', 'https://gelecegiyazanlar.turkcell.com.tr/egitimleri/ileri-java', NOW(), 'system', NOW(), 'system');
 
 -- BLOGS
-INSERT INTO blogs (title, image_src, image_alt, url, created_at, updated_at, created_by, updated_by) VALUES
-('React.js ile Güvenli Yazılım Pratikleri', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/reactjs-ile-guvenli-yazilim-pratikleri', NOW(), NOW(), 'system', 'system'),
-('Regex ile Gizli Bilgilerin Tespiti', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/regex-ile-gizli-bilgilerin-tespiti', NOW(), NOW(), 'system', 'system'),
-('Web Yazılımına Nereden Başlanmalı?', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/web-yazilimina-nereden-baslanmali', NOW(), NOW(), 'system', 'system'),
-('React JS için Redux Kurulumu ve Yönetimi', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/react-js-icin-redux-kurulumu-ve-yonetimi', NOW(), NOW(), 'system', 'system'),
-('Pandas ile Veri Analizi', '', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/pandas-ile-veri-analizi', NOW(), NOW(), 'system', 'system');
+INSERT INTO blogs (title, image_src, image_alt, url, created_at, created_by, updated_at, updated_by) VALUES
+('React.js ile Güvenli Yazılım Pratikleri', 'react.png', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/reactjs-ile-guvenli-yazilim-pratikleri', NOW(), 'system', NOW(), 'system'),
+('Regex ile Gizli Bilgilerin Tespiti', 'regex.png', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/regex-ile-gizli-bilgilerin-tespiti', NOW(), 'system', NOW(), 'system'),
+('Web Yazılımına Nereden Başlanmalı?', 'web.jpg', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/web-yazilimina-nereden-baslanmali', NOW(), 'system', NOW(), 'system'),
+('React JS için Redux Kurulumu ve Yönetimi', 'react.png', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/react-js-icin-redux-kurulumu-ve-yonetimi', NOW(), 'system', NOW(), 'system'),
+('Pandas ile Veri Analizi', 'pandas.jpg', '', 'https://gelecegiyazanlar.turkcell.com.tr/blog/pandas-ile-veri-analizi', NOW(), 'system', NOW(), 'system');
+
 
 -- CAREER PATHS
 INSERT INTO career_paths (name, description, created_by, updated_by, created_at, updated_at) VALUES
