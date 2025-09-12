@@ -1,6 +1,7 @@
 package com.aeta.aeta.model.entity;
 
 import com.aeta.aeta.model.entity.base.BaseContentEntity;
+import com.aeta.aeta.model.entity.relation.Category;
 import com.aeta.aeta.model.entity.relation.Tag;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,4 +32,12 @@ public class Blog extends BaseContentEntity {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private Set<Tag> tags = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "blog_categories",
+            joinColumns = @JoinColumn(name = "blog_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
 }

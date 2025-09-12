@@ -6,43 +6,34 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-    @RestController
-    @RequestMapping("/api/courses")
-    @CrossOrigin(origins = "http://localhost:5173")
-    public class CourseController {
+@RestController
+@RequestMapping("/api/courses")
+@CrossOrigin(origins = "http://localhost:5173")
+public class CourseController {
 
-        private final ICourseService courseService;
+    private final ICourseService courseService;
 
-        public CourseController(ICourseService courseService) {
-            this.courseService = courseService;
-        }
-
-        @GetMapping
-        public List<CourseDto> getAllCourses() {
-            return courseService.getAllCourses();
-        }
-
-        @GetMapping("/{id}")
-        public CourseDto getCourseById(@PathVariable Long id) {
-            return courseService.getCourseById(id);
-        }
-
-        @GetMapping("/tag/{tagId}")
-        public List<CourseDto> getCoursesByTag(@PathVariable Long tagId) {
-            return courseService.getCoursesByTag(tagId);
-        }
-        @GetMapping("/by-category/{id}")
-        public List<CourseDto> getCoursesByCategory(@PathVariable Long id) {
-            return courseService.getCoursesByCategory(id);
-        }
-
-        @GetMapping("/search")
-        public List<CourseDto> searchCourses(
-                @RequestParam(required = false) List<Long> tagIds,
-                @RequestParam(required = false) List<Long> categoryIds
-        ) {
-            return courseService.searchCoursesByTagsOrCategories(tagIds, categoryIds);
-        }
+    public CourseController(ICourseService courseService) {
+        this.courseService = courseService;
     }
 
+    @GetMapping
+    public List<CourseDto> getAllCourses() {
+        return courseService.getAllCourses();
+    }
 
+    @GetMapping("/{id}")
+    public CourseDto getCourseById(@PathVariable Long id) {
+        return courseService.getCourseById(id);
+    }
+
+    @GetMapping("/tag/{tagId}")
+    public List<CourseDto> getCoursesByTag(@PathVariable Long tagId) {
+        return courseService.getCoursesByTag(tagId);
+    }
+
+    @GetMapping("/by-category/{id}")
+    public List<CourseDto> getCoursesByCategory(@PathVariable Long id) {
+        return courseService.getCoursesByCategory(id);
+    }
+}

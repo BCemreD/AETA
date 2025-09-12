@@ -6,39 +6,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-    @RestController
-    @RequestMapping("/api/blogs")
-    @CrossOrigin(origins = "http://localhost:5173")
-    public class BlogController {
+@RestController
+@RequestMapping("/api/blogs")
+@CrossOrigin(origins = "http://localhost:5173")
+public class BlogController {
 
-        private final IBlogService blogService;
+    private final IBlogService blogService;
 
-        public BlogController(IBlogService blogService) {
-            this.blogService = blogService;
-        }
-
-        @GetMapping
-        public List<BlogDto> getAllBlogs() {
-            return blogService.getAllBlogs();
-        }
-
-        @GetMapping("/tag/{id}")
-        public List<BlogDto> getBlogsByTag(@PathVariable("id") Long tagId) {
-            return blogService.getBlogsByTag(tagId);
-        }
-
-        @GetMapping("/by-category/{id}")
-        public List<BlogDto> getBlogsByCategory(@PathVariable Long id) {
-            return blogService.getBlogsByCategory(id);
-        }
-
-        @GetMapping("/search")
-        public List<BlogDto> searchBlogs(
-                @RequestParam(required = false) List<Long> tagIds,
-                @RequestParam(required = false) List<Long> categoryIds
-        ) {
-            return blogService.searchBlogsByTagsOrCategories(tagIds, categoryIds);
-        }
+    public BlogController(IBlogService blogService) {
+        this.blogService = blogService;
     }
 
+    @GetMapping
+    public List<BlogDto> getAllBlogs() {
+        return blogService.getAllBlogs();
+    }
 
+    @GetMapping("/tag/{id}")
+    public List<BlogDto> getBlogsByTag(@PathVariable("id") Long tagId) {
+        return blogService.getBlogsByTag(tagId);
+    }
+
+    @GetMapping("/by-category/{id}")
+    public List<BlogDto> getBlogsByCategory(@PathVariable Long id) {
+        return blogService.getBlogsByCategory(id);
+    }
+}

@@ -5,7 +5,7 @@ INSERT INTO tags (name, created_by, updated_by) VALUES
 ('Python', 'system', 'system'),
 ('JavaScript', 'system', 'system'),
 ('Cloud', 'system', 'system'),
-('Data Science', 'system', 'system'),
+('Veri Bilimi', 'system', 'system'),
 ('React', 'system', 'system'),
 ('Veri Görselleştirme', 'system', 'system');
 
@@ -13,7 +13,7 @@ INSERT INTO tags (name, created_by, updated_by) VALUES
 INSERT INTO categories (name, created_by, updated_by) VALUES
 ('Yazılım Geliştirme', 'system', 'system'),
 ('Mobil Uygulama', 'system', 'system'),
-('Veri Bilimi', 'system', 'system'),
+('Veri', 'system', 'system'),
 ('Bulut Bilişim', 'system', 'system'),
 ('Kariyer', 'system', 'system'),
 ('Backend', 'system', 'system'),

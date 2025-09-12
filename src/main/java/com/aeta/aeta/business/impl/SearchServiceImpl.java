@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 @Service
 public class SearchServiceImpl implements ISearchService {
 
-
     private final CourseRepository courseRepository;
     private final BlogRepository blogRepository;
     private final TagRepository tagRepository;
@@ -36,59 +35,98 @@ public class SearchServiceImpl implements ISearchService {
     }
 
     @Override
-    public List<CourseDto> searchCourses(String query) {
-        String lowerQuery = query.toLowerCase();
-
-        // Tag and Category ID lists
-        List<Long> matchingTagIds = tagRepository.findAll().stream()
-                .filter(tag -> lowerQuery.contains(tag.getName().toLowerCase()))
-                .map(Tag::getId)
-                .collect(Collectors.toList());
-
-        List<Long> matchingCategoryIds = categoryRepository.findAll().stream()
-                .filter(cat -> lowerQuery.contains(cat.getName().toLowerCase()))
-                .map(Category::getId)
-                .collect(Collectors.toList());
-
-        // Union logic: tag or category matches
+    public List<CourseDto> searchCourses(String query, List<Long> tagIds, List<Long> categoryIds) {
         Set<Course> results = new HashSet<>();
-        if (!matchingTagIds.isEmpty()) {
-            results.addAll(courseRepository.findByTagsIdIn(matchingTagIds));
+        String lowerQuery = (query != null) ? query.toLowerCase() : "";
+        boolean isQueryPresent = !lowerQuery.isBlank();
+        boolean areTagsPresent = tagIds != null && !tagIds.isEmpty();
+        boolean areCategoriesPresent = categoryIds != null && !categoryIds.isEmpty();
+
+        // Only prompt bar
+        if (isQueryPresent && !areTagsPresent && !areCategoriesPresent) {
+            // split words
+            String[] keywords = lowerQuery.split("\\s+");
+            Set<Long> foundTagIds = new HashSet<>();
+            Set<Long> foundCategoryIds = new HashSet<>();
+
+            // Search tag or catg for each word
+            for (String keyword : keywords) {
+                foundTagIds.addAll(tagRepository.findByNameContainingIgnoreCase(keyword)
+                        .stream().map(Tag::getId).collect(Collectors.toList()));
+                foundCategoryIds.addAll(categoryRepository.findByNameContainingIgnoreCase(keyword)
+                        .stream().map(Category::getId).collect(Collectors.toList()));
+            }
+
+            // Search from title
+            results.addAll(courseRepository.findByTitleContainingIgnoreCase(lowerQuery));
+
+            // Search by tag or catg IDs
+            if (!foundTagIds.isEmpty()) {
+                results.addAll(courseRepository.findByTagsIdIn(foundTagIds.stream().toList()));
+            }
+            if (!foundCategoryIds.isEmpty()) {
+                results.addAll(courseRepository.findByCategoriesIdIn(foundCategoryIds.stream().toList()));
+            }
         }
-        if (!matchingCategoryIds.isEmpty()) {
-            results.addAll(courseRepository.findByCategoriesIdIn(matchingCategoryIds));
+        // prepared prompts
+        else if (areTagsPresent) {
+            results.addAll(courseRepository.findByTagsIdIn(tagIds));
+        }
+        else if (areCategoriesPresent) {
+            results.addAll(courseRepository.findByCategoriesIdIn(categoryIds));
+        }
+        // nol filter
+        else {
+            results.addAll(courseRepository.findAll());
         }
 
         return results.stream()
                 .map(this::toCourseDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
-    public List<BlogDto> searchBlogs(String query) {
-        String lowerQuery = query.toLowerCase();
-
-        List<Long> matchingTagIds = tagRepository.findAll().stream()
-                .filter(tag -> lowerQuery.contains(tag.getName().toLowerCase()))
-                .map(Tag::getId)
-                .collect(Collectors.toList());
-
-        List<Long> matchingCategoryIds = categoryRepository.findAll().stream()
-                .filter(cat -> lowerQuery.contains(cat.getName().toLowerCase()))
-                .map(Category::getId)
-                .collect(Collectors.toList());
-
+    public List<BlogDto> searchBlogs(String query, List<Long> tagIds, List<Long> categoryIds) {
         Set<Blog> results = new HashSet<>();
-        if (!matchingTagIds.isEmpty()) {
-            results.addAll(blogRepository.findByTagsIdIn(matchingTagIds));
+        String lowerQuery = (query != null) ? query.toLowerCase() : "";
+        boolean isQueryPresent = !lowerQuery.isBlank();
+        boolean areTagsPresent = tagIds != null && !tagIds.isEmpty();
+        boolean areCategoriesPresent = categoryIds != null && !categoryIds.isEmpty();
+
+        if (isQueryPresent) {
+            String[] keywords = lowerQuery.split("\\s+");
+            Set<Long> foundTagIds = new HashSet<>();
+            Set<Long> foundCategoryIds = new HashSet<>();
+
+            for (String keyword : keywords) {
+                foundTagIds.addAll(tagRepository.findByNameContainingIgnoreCase(keyword)
+                        .stream().map(Tag::getId).collect(Collectors.toList()));
+                foundCategoryIds.addAll(categoryRepository.findByNameContainingIgnoreCase(keyword)
+                        .stream().map(Category::getId).collect(Collectors.toList()));
+            }
+
+            results.addAll(blogRepository.findByTitleContainingIgnoreCase(lowerQuery));
+
+            if (!foundTagIds.isEmpty()) {
+                results.addAll(blogRepository.findByTagsIdIn(foundTagIds.stream().toList()));
+            }
+            if (!foundCategoryIds.isEmpty()) {
+                results.addAll(blogRepository.findByCategoriesIdIn(foundCategoryIds.stream().toList()));
+            }
         }
-        if (!matchingCategoryIds.isEmpty()) {
-            results.addAll(blogRepository.findByCategoriesIdIn(matchingCategoryIds));
+        else if (areTagsPresent) {
+            results.addAll(blogRepository.findByTagsIdIn(tagIds));
+        }
+        else if (areCategoriesPresent) {
+            results.addAll(blogRepository.findByCategoriesIdIn(categoryIds));
+        }
+        else {
+            results.addAll(blogRepository.findAll());
         }
 
         return results.stream()
                 .map(this::toBlogDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private CourseDto toCourseDto(Course course) {

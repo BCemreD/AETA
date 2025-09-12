@@ -24,13 +24,6 @@ CREATE TABLE job_tags (
 );
 
 --category-based relation
-CREATE TABLE content_categories (
-    content_id BIGINT NOT NULL,
-    category_id BIGINT NOT NULL,
-    PRIMARY KEY (content_id, category_id),
-    FOREIGN KEY (category_id) REFERENCES categories(id)
-);
-
 CREATE TABLE course_categories (
     course_id BIGINT NOT NULL,
     category_id BIGINT NOT NULL,

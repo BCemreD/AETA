@@ -5,10 +5,9 @@ import com.aeta.aeta.model.dto.CourseDto;
 import java.util.List;
 
 public interface ICourseService {
-    List<CourseDto> getCoursesByTag(Long tagId); // Parametreyi Long tagId olarak değiştirdik
+    List<CourseDto> getCoursesByTag(Long tagId);
     CourseDto getCourseById(Long id);
     List<CourseDto> getAllCourses();
     List<CourseDto> getCoursesByCategory(Long categoryId);
-    public List<CourseDto> searchCoursesByTagsOrCategories(List<Long> tagIds, List<Long> categoryIds);
 
 }

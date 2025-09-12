@@ -14,11 +14,4 @@ public class BaseContentEntity extends BaseEntity{
 
     private String title;
 
-    @ManyToMany
-    @JoinTable (
-            name = "content_categories",
-            joinColumns = @JoinColumn (name = "content_id"),
-            inverseJoinColumns = @JoinColumn (name = "category_id")
-    )
-    private Set<Category> categories;
 }

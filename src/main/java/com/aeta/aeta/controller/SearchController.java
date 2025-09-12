@@ -23,15 +23,22 @@ public class SearchController {
 
     @PostMapping
     public Map<String, Object> searchAll(@RequestBody SearchRequest request) {
-        List<CourseDto> courses = searchService.searchCourses(request.getQuery());
-        List<BlogDto> blogs = searchService.searchBlogs(request.getQuery());
+        List<CourseDto> courses = searchService.searchCourses(
+                request.getQuery(),
+                request.getTagIds(),
+                request.getCategoryIds()
+        );
+        List<BlogDto> blogs = searchService.searchBlogs(
+                request.getQuery(),
+                request.getTagIds(),
+                request.getCategoryIds()
+        );
 
         Map<String, Object> response = new HashMap<>();
         response.put("courses", courses);
         response.put("blogs", blogs);
-        response.put("botMessage", "Toplam " + (courses.size() + blogs.size()) + " sonuç bulundu.");
+        response.put("botMessage", "Aramanıza uygun " + (courses.size() + blogs.size()) + " sonuç bulundu.");
 
         return response;
     }
-
 }
