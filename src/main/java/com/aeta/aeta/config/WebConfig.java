@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${FRONTEND_URL:http://localhost:5173}")
+    @Value("${FRONTEND_URL:https://aetafrontend-production.up.railway.app}")
     private String frontendUrl;
 
     @Override
