@@ -1,5 +1,17 @@
 This is mvp for educational adviser simulation. This project is a RESTful API built for a blog and course platform. It is developed using Spring Boot, JPA, and PostgreSQL. The base's taken from Gelecegi Yazanlar blog as isnpiration
 
+## Usage
+- Default courses and blogs shown by getting mock db.
+- Get input from user or from the dedicated prompts (frontend).
+- Dedicated answers return when the user sends an input.
+- Search courses and suggested blogs are searched by using containsIgnoreCase with Tag and Category entities. The sentence is separated and every words checked.
+### In Progress
+- Favorites feature
+- User management improvements
+- Job posting module
+- Course status ("in progress", "finished"). By regarding status, new courses and blogs will suggested.
+- Career path
+
 ## Prerequisites
 The following software must be installed on your system to run the project successfully:
 
@@ -8,6 +20,15 @@ The following software must be installed on your system to run the project succe
 - PostgreSQL: For the database.
 - Flyway (optional): To manage database migrations.
 - Git: To clone the project code.
+
+## Technologies
+- Spring Boot
+- JPA
+- Flyway
+- Lombok
+- ModelMapper
+- JWT
+- H2
 
 ### Setup and Running
 Follow these steps to set up and run the backend project on your local machine.
@@ -28,7 +49,7 @@ Replace the settings in application.properties with your own database informatio
 spring.datasource.url=jdbc:postgresql://localhost:5432/aeta
 spring.datasource.username=postgres
 spring.datasource.password=password
-spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.ddl-auto=update // Note: For production environments, avoid using update. Use proper Flyway migrations instead.
 ```
 > [Important]  : If you are using Flyway for database migrations, check the SQL files in the src/main/resources/db/migration/ folder. You will not need to manually enter data into the database.
 
